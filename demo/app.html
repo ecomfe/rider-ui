@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Rider UI</title>
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+    <nav class="ui-bar" data-ui="header"></nav>
+
+    <div class="container">
+        <h2>Normal Button</h2>
+        <a href="#" class="ui-btn" data-ui="primary icon-left">
+            <i class="icon-medkit"></i>
+            健康
+        </a>
+        <a href="#" class="ui-btn" data-ui="danger icon-only">
+            <i class="icon-heart"></i>
+        </a>
+        <a href="#" class="ui-btn" data-ui="success icon-right">
+            <i class="icon-cny"></i>
+            购物
+        </a>
+        <a href="#" class="ui-btn" data-ui="icon-only">
+            <i class="icon-right"></i>
+        </a>
+        <a href="#" class="ui-btn" data-ui="block warning">Block Button</a>
+
+        <h2>Small Button</h2>
+        <a href="#" class="ui-btn" data-ui="small success icon-left">
+            <i class="icon-question-circle"></i>
+            教育
+        </a>
+        <a href="#" class="ui-btn" data-ui="small primary disabled">健康</a>
+        <button class="ui-btn" data-ui="small danger icon-left">
+            <i class="icon-tags"></i>
+            购物
+        </button>
+        <a href="#" class="ui-btn" data-ui="small icon-only">
+            <i class="icon-question-circle"></i>
+        </a>
+        <a href="#" class="ui-btn" data-ui="small warning icon-right">
+            Star
+            <i class="icon-star"></i>
+        </a>
+
+        <h2>Large Button</h2>
+        <a href="#" class="ui-btn" data-ui="large icon-only">
+            <i class="icon-left"></i>
+        </a>
+        <a href="#" class="ui-btn" data-ui="large primary icon-right">
+            <i class="icon-right"></i>
+            下一步
+        </a>
+        <a href="#" class="ui-btn" data-ui="large success icon-left">
+            <i class="icon-stethoscope"></i>
+            检查
+        </a>
+        <a href="#" class="ui-btn" data-ui="large block danger icon-left">
+            <i class="icon-bars"></i>
+            爱玩
+        </a>
+    </div>
+
+    <script>
+    document.addEventListener('touchstart',function(){},false);
+    </script>
+</body>
+</html>

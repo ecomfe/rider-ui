@@ -1,0 +1,170 @@
+@require 'common'
+
+
+// variables
+// ================
+
+// global setting
+$-ui-btn-border-width ?= 0
+$-ui-btn-border-radius ?= 0
+
+// size
+// ----------------
+
+// default
+$-ui-btn-font-size ?= 16px
+$-ui-btn-height ?= 44px
+$-ui-btn-padding ?= 12px
+$-ui-btn-icon-size ?= 20px
+
+// large
+$-ui-btn-large-font-size ?= 18px
+$-ui-btn-large-height ?= 54px
+$-ui-btn-large-padding ?= 16px
+$-ui-btn-large-icon-size ?= 22px
+
+// small
+$-ui-btn-small-font-size ?= 12px
+$-ui-btn-small-height ?= 28px
+$-ui-btn-small-padding ?= 6px
+$-ui-btn-small-icon-size ?= 14px
+
+// colors
+// ----------------
+
+// default
+$-ui-btn-bg ?= #f8f8f8
+$-ui-btn-border ?= #b2b2b2
+$-ui-btn-color ?= #444
+
+// primary
+$-ui-btn-primary-bg ?= #4a87ee
+$-ui-btn-primary-border ?= #145fd7
+$-ui-btn-primary-color ?= #fff
+
+// danger
+$-ui-btn-danger-bg ?= #ef4e3a
+$-ui-btn-danger-border ?= #cc2311
+$-ui-btn-danger-color ?= #fff
+
+// warning
+$-ui-btn-warning-bg ?= #f0b840
+$-ui-btn-warning-border ?= #d39211
+$-ui-btn-warning-color ?= #fff
+
+// success
+$-ui-btn-success-bg ?= #66cc33
+$-ui-btn-success-border ?= #498f24
+$-ui-btn-success-color ?= #fff
+
+
+// mixins
+// ================
+
+// size
+ui-btn-size($font-size, $height, $padding)
+    font-size: rem($font-size)
+    padding: 0 $padding
+    line-height: $height - $-ui-btn-border-width * 2
+    min-width: $height
+    height: $height
+
+// style
+ui-btn-style($ui-bg, $ui-border, $ui-color, $ui-active-bg = null, $ui-active-border = null, $ui-active-color = null)
+    color: $ui-color if $ui-color
+    background: $ui-bg if $ui-bg
+    border-color: $ui-border if $ui-border
+
+    if $ui-active-bg == null && typeof($ui-bg) == 'rgba'
+        $ui-active-bg = darken($ui-bg, 12%)
+    if $ui-active-border == null && typeof($ui-border) == 'rgba'
+        $ui-active-border = darken($ui-border, 12%)
+    if $ui-active-color == null && typeof($ui-color) == 'rgba'
+        $ui-active-color = $ui-color
+
+
+    &:active
+    &[{$-ui-attr}~=active]
+        color: $ui-active-color if $ui-active-color
+        background: $ui-active-bg if $ui-active-bg
+        border-color: $ui-active-border if $ui-active-border
+        transition: all .4s
+        box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15)
+
+ui-btn-icon($icon-size, $height, $padding)
+    > [class^={$-ui-icon-prefix}]
+        font-size: $icon-size
+        width: $icon-size
+
+    &[{$-ui-attr}~=icon-left]
+        padding-left: $padding + $icon-size
+        > [class^={$-ui-icon-prefix}]
+            absolute: 0 _ _ ($padding / 1.5)
+
+    &[{$-ui-attr}~=icon-right]
+        padding-right: $padding + $icon-size
+        > [class^={$-ui-icon-prefix}]
+            absolute: 0 ($padding / 1.5) _ _
+
+    &[{$-ui-attr}~=icon-only]
+        padding: 0
+
+// exports
+// ================
+.ui-btn
+    vertical-align: top
+    text-decoration: none
+    box-sizing: border-box
+    text-align: center
+    position: relative
+    border-style: solid
+    border-width: $-ui-btn-border-width
+    border-radius: $-ui-btn-border-radius
+
+    ellipsis()
+
+    ui-btn-size($-ui-btn-font-size, $-ui-btn-height, $-ui-btn-padding)
+    ui-btn-icon($-ui-btn-icon-size, $-ui-btn-height, $-ui-btn-padding)
+    ui-btn-style($-ui-btn-bg, $-ui-btn-border, $-ui-btn-color)
+
+    user-select: none
+
+    // size
+    &[{$-ui-attr}~=large]
+        ui-btn-size($-ui-btn-large-font-size, $-ui-btn-large-height, $-ui-btn-large-padding)
+        ui-btn-icon($-ui-btn-large-icon-size, $-ui-btn-large-height, $-ui-btn-large-padding)
+
+    &[{$-ui-attr}~=small]
+        ui-btn-size($-ui-btn-small-font-size, $-ui-btn-small-height, $-ui-btn-small-padding)
+        ui-btn-icon($-ui-btn-small-icon-size, $-ui-btn-small-height, $-ui-btn-small-padding)
+
+    // block
+    &[{$-ui-attr}~=block]
+        display: block
+    &:not([{$-ui-attr}~=block])
+        display: inline-block
+
+    // disabled
+    &[disabled]
+    &[{$-ui-attr}~=disabled]
+        opacity: .5
+        // ie mobile don't support this.
+        pointer-events: none
+
+    // type
+    &[{$-ui-attr}~=primary]
+        ui-btn-style($-ui-btn-primary-bg, $-ui-btn-primary-border, $-ui-btn-primary-color)
+
+    &[{$-ui-attr}~=danger]
+        ui-btn-style($-ui-btn-danger-bg, $-ui-btn-danger-border, $-ui-btn-danger-color)
+
+    &[{$-ui-attr}~=warning]
+        ui-btn-style($-ui-btn-warning-bg, $-ui-btn-warning-border, $-ui-btn-warning-color)
+
+    &[{$-ui-attr}~=success]
+        ui-btn-style($-ui-btn-success-bg, $-ui-btn-success-border, $-ui-btn-success-color)
+
+
+// custom type
+// .ui-btn[{$-ui-attr}~=custom]
+//     ui-btn-style(transparent, #4a87ee, #4a87ee, #4a87ee, #4a87ee, #fff)
