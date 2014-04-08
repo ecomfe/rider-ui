@@ -1,13 +1,125 @@
 @require 'common'
 
+
 // variables
 // ================
 
+// global setting
+$-ui-bar-height ?= 44px
+$-ui-bar-padding ?= 8px
+$-ui-bar-title-font-size ?= 16px
+
+$-ui-bar-z-index ?= 10
+$-ui-bar-title-z-index ?= 0
+$-ui-bar-btn-z-index ?= 1
+
+// default
+$-ui-bar-bg ?= #f8f8f8
+$-ui-bar-border ?= #b2b2b2
+$-ui-bar-text ?= #444
+
+// primary
+$-ui-bar-primary-bg ?= #4a87ee
+$-ui-bar-primary-border ?= #145fd7
+$-ui-bar-primary-text ?= #fff
+
+// danger
+$-ui-bar-danger-bg ?= #ef4e3a
+$-ui-bar-danger-border ?= #cc2311
+$-ui-bar-danger-text ?= #fff
+
+// warning
+$-ui-bar-warning-bg ?= #f0b840
+$-ui-bar-warning-border ?= #d39211
+$-ui-bar-warning-text ?= #fff
+
+// success
+$-ui-bar-success-bg ?= #66cc33
+$-ui-bar-success-border ?= #498f24
+$-ui-bar-success-text ?= #fff
 
 // mixins
 // ================
-
+ui-bar-style($ui-bg, $ui-border, $ui-text)
+    background-color: $ui-bg
+    border-color: $ui-border
+    background-image: linear-gradient(0deg, $ui-border, $ui-border 50%, transparent 50%)
+    color: $ui-text
+    [{$-ui-attr}~=title]
+        color: $ui-text
 
 // exports
 // ================
+.ui-bar
+    display: flex
+    transform: translate3d(0, 0, 0)
+    absolute: _ 0
+    z-index: $-ui-bar-z-index
+    width: 100%
+    height: $-ui-bar-height
+    padding: $-ui-bar-padding
+    box-sizing: border-box
+    user-select: none
+
+    background-color: $-ui-bar-bg
+
+    border-width: 0
+    border-style: solid
+    border-top: 1px solid transparent
+    border-bottom: 1px solid $-ui-bar-border
+
+    // 1px border on retina
+    background-size: 0
+
+    +retina()
+        border: none
+        background-image: linear-gradient(0deg, $-ui-bar-border, $-ui-bar-border 50%, transparent 50%)
+        background-position: bottom
+        background-size: 100% 1px
+        background-repeat: no-repeat
+
+    // title
+    [{$-ui-attr}~=title]
+        absolute: 0 0 _
+        z-index: $-ui-bar-title-z-index
+        font-size: rem($-ui-bar-title-font-size)
+        line-height: $-ui-bar-height
+        text-align: center
+
+        margin: 0 10px
+        min-width: 30px
+
+        ellipsis()
+
+        a
+            color: inherit
+
+    // header & footer
+    &[{$-ui-attr}~=header]
+        top: 0
+        border-width: 0 _ 1px
+
+    &[{$-ui-attr}~=footer]
+        bottom: 0
+        border-width: 1px _ 0
+        background-position: top
+
+
+    // fixed
+    &[{$-ui-attr}~=fixed]
+        position: fixed
+
+
+    // type
+    &[{$-ui-attr}~=primary]
+        ui-bar-style($-ui-bar-primary-bg, $-ui-bar-primary-border, $-ui-bar-primary-text)
+
+    &[{$-ui-attr}~=danger]
+        ui-bar-style($-ui-bar-danger-bg, $-ui-bar-danger-border, $-ui-bar-danger-text)
+
+    &[{$-ui-attr}~=warning]
+        ui-bar-style($-ui-bar-warning-bg, $-ui-bar-warning-border, $-ui-bar-warning-text)
+
+    &[{$-ui-attr}~=success]
+        ui-bar-style($-ui-bar-success-bg, $-ui-bar-success-border, $-ui-bar-success-text)
 
