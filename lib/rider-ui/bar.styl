@@ -53,7 +53,7 @@ ui-bar-style($ui-bg, $ui-border, $ui-text)
 .ui-bar
     display: flex
     transform: translate3d(0, 0, 0)
-    absolute: _ 0
+    fixed: _ 0
     z-index: $-ui-bar-z-index
     width: 100%
     height: $-ui-bar-height
@@ -70,7 +70,6 @@ ui-bar-style($ui-bg, $ui-border, $ui-text)
 
     // 1px border on retina
     background-size: 0
-
     +retina()
         border: none
         background-image: linear-gradient(0deg, $-ui-bar-border, $-ui-bar-border 50%, transparent 50%)
@@ -104,11 +103,9 @@ ui-bar-style($ui-bg, $ui-border, $ui-text)
         border-width: 1px _ 0
         background-position: top
 
-
     // fixed
-    &[{$-ui-attr}~=fixed]
-        position: fixed
-
+    &[{$-ui-attr}~=static]
+        position: static
 
     // type
     &[{$-ui-attr}~=primary]
@@ -122,4 +119,15 @@ ui-bar-style($ui-bg, $ui-border, $ui-text)
 
     &[{$-ui-attr}~=success]
         ui-bar-style($-ui-bar-success-bg, $-ui-bar-success-border, $-ui-bar-success-text)
+
+
+    // with button
+    .ui-btn
+        z-index: $-ui-bar-btn-z-index
+
+    [{$-ui-attr}~=title] + .ui-btn:last-child
+    > .ui-btn + .ui-btn:last-child
+    > .ui-btn[{$-ui-attr}~=pull-right]
+        absolute: _ $-ui-bar-padding _ _
+
 
