@@ -5,8 +5,8 @@
 // ================
 
 // global setting
-$-ui-btn-border-width ?= 0
-$-ui-btn-border-radius ?= 0
+$-ui-btn-border-width ?= 1px
+$-ui-btn-border-radius ?= 2px
 
 // size
 // ----------------
@@ -73,7 +73,7 @@ ui-btn-size($font-size, $height, $padding)
 ui-btn-style($ui-bg, $ui-border, $ui-text, $ui-active-bg = null, $ui-active-border = null, $ui-active-text = null)
     color: $ui-text if $ui-text
     background: $ui-bg if $ui-bg
-    border-text: $ui-border if $ui-border
+    border-color: $ui-border if $ui-border
 
     if $ui-active-bg == null && typeof($ui-bg) == 'rgba'
         $ui-active-bg = darken($ui-bg, 12%)
@@ -87,7 +87,7 @@ ui-btn-style($ui-bg, $ui-border, $ui-text, $ui-active-bg = null, $ui-active-bord
     &[{$-ui-attr}~=active]
         color: $ui-active-text if $ui-active-text
         background: $ui-active-bg if $ui-active-bg
-        border-text: $ui-active-border if $ui-active-border
+        border-color: $ui-active-border if $ui-active-border
         transition: all .4s
         box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15)
 
