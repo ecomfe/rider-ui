@@ -5,109 +5,79 @@
 // ================
 
 // global setting
-$-ui-btn-border-width ?= 1px
+$-ui-btn-border-width ?= 0
 $-ui-btn-border-radius ?= 2px
 
 // size
 // ----------------
 
-// default
-$-ui-btn-font-size ?= 16px
-$-ui-btn-height ?= 44px
-$-ui-btn-padding ?= 12px
-$-ui-btn-icon-size ?= 20px
-
-// large
-$-ui-btn-large-font-size ?= 18px
-$-ui-btn-large-height ?= 54px
-$-ui-btn-large-padding ?= 16px
-$-ui-btn-large-icon-size ?= 22px
-
-// small
-$-ui-btn-small-font-size ?= 12px
-$-ui-btn-small-height ?= 28px
-$-ui-btn-small-padding ?= 6px
-$-ui-btn-small-icon-size ?= 14px
+$-ui-btn-size ?= { font-size: 16px, height: 44px, padding: 12px, icon-size: 20px }
+$-ui-btn-size-large ?= { font-size: 18px, height: 54px, padding: 16px, icon-size: 22px }
+$-ui-btn-size-small ?= { font-size: 12px, height: 28px, padding: 6px, icon-size: 14px }
 
 // colors
 // ----------------
 
-// default
-$-ui-btn-bg ?= #f8f8f8
-$-ui-btn-border ?= #b2b2b2
-$-ui-btn-text ?= #444
-
-// primary
-$-ui-btn-primary-bg ?= #4a87ee
-$-ui-btn-primary-border ?= #145fd7
-$-ui-btn-primary-text ?= #fff
-
-// danger
-$-ui-btn-danger-bg ?= #ef4e3a
-$-ui-btn-danger-border ?= #cc2311
-$-ui-btn-danger-text ?= #fff
-
-// warning
-$-ui-btn-warning-bg ?= #f0b840
-$-ui-btn-warning-border ?= #d39211
-$-ui-btn-warning-text ?= #fff
-
-// success
-$-ui-btn-success-bg ?= #66cc33
-$-ui-btn-success-border ?= #498f24
-$-ui-btn-success-text ?= #fff
-
+$-ui-btn-colors ?= { bg: #f8f8f8, border: #b2b2b2, text: #444 }
+$-ui-btn-colors-primary ?= { bg: #4a87ee, border: #145fd7, text: #fff }
+$-ui-btn-colors-danger ?= { bg: #ef4e3a, border: #cc2311, text: #fff }
+$-ui-btn-colors-warning ?= { bg: #f0b840, border: #d39211, text: #fff }
+$-ui-btn-colors-success ?= { bg: #66cc33, border: #498f24, text: #fff }
 
 // mixins
 // ================
 
 // size
-ui-btn-size($font-size, $height, $padding)
-    font-size: rem($font-size)
-    padding: 0 $padding
-    line-height: $height - $-ui-btn-border-width * 2
-    min-width: $height
-    height: $height
+ui-btn-size($ui-size, $ui-border-width = $-ui-btn-border-width)
+    font-size: rem($ui-size.font-size)
+    padding: 0 $ui-size.padding
+    line-height: $ui-size.height - $ui-border-width * 2
+    min-width: $ui-size.height
+    height: $ui-size.height
 
-// style
-ui-btn-style($ui-bg, $ui-border, $ui-text, $ui-active-bg = null, $ui-active-border = null, $ui-active-text = null)
-    color: $ui-text if $ui-text
-    background: $ui-bg if $ui-bg
-    border-color: $ui-border if $ui-border
-
-    if $ui-active-bg == null && typeof($ui-bg) == 'rgba'
-        $ui-active-bg = darken($ui-bg, 12%)
-    if $ui-active-border == null && typeof($ui-border) == 'rgba'
-        $ui-active-border = darken($ui-border, 12%)
-    if $ui-active-text == null && typeof($ui-text) == 'rgba'
-        $ui-active-text = $ui-text
-
-
-    &:active
-    &[{$-ui-attr}~=active]
-        color: $ui-active-text if $ui-active-text
-        background: $ui-active-bg if $ui-active-bg
-        border-color: $ui-active-border if $ui-active-border
-        transition: all .4s
-        box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15)
-
-ui-btn-icon($icon-size, $height, $padding)
+// icon
+ui-btn-icon($ui-size)
     > [class^={$-ui-icon-prefix}]
-        font-size: $icon-size
-        width: $icon-size
+        font-size: $ui-size.icon-size
+        width: $ui-size.icon-size
 
     &[{$-ui-attr}~=icon-left]
-        padding-left: $padding + $icon-size
+        padding-left: $ui-size.padding + $ui-size.icon-size
         > [class^={$-ui-icon-prefix}]
-            absolute: 0 _ _ ($padding / 1.5)
+            absolute: 0 _ _ ($ui-size.padding / 1.5)
 
     &[{$-ui-attr}~=icon-right]
-        padding-right: $padding + $icon-size
+        padding-right: $ui-size.padding + $ui-size.icon-size
         > [class^={$-ui-icon-prefix}]
-            absolute: 0 ($padding / 1.5) _ _
+            absolute: 0 ($ui-size.padding / 1.5) _ _
 
     &[{$-ui-attr}~=icon-only]
         padding: 0
+
+// style
+ui-btn-style($ui-colors, $ui-active-colors = null)
+    p($ui-colors)
+    color: $ui-colors.text if $ui-colors.text
+    background: $ui-colors.bg if $ui-colors.bg
+    border-color: $ui-colors.border if $ui-colors.border
+
+    if $ui-active-colors == null
+        $ui-active-colors = {}
+        $ui-active-colors.text = $ui-colors.text
+        if typeof($ui-colors.bg) == 'rgba'
+            $ui-active-colors-bg = darken($ui-colors.bg, 10%)
+            $ui-active-colors.bg = $ui-active-colors-bg
+        if typeof($ui-colors.border) == 'rgba'
+            $ui-active-colors-border = darken($ui-colors.border, 10%)
+            $ui-active-colors.border = $ui-active-colors-border
+
+    &:active
+    &[{$-ui-attr}~=active]
+        color: $ui-active-colors.text if $ui-active-colors.text
+        background: $ui-active-colors.bg if $ui-active-colors.bg
+        border-color: $ui-active-colors.border if $ui-active-colors.border
+        // transition: all .4s
+        // box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15)
 
 // exports
 // ================
@@ -124,18 +94,18 @@ ui-btn-icon($icon-size, $height, $padding)
 
     ellipsis()
 
-    ui-btn-size($-ui-btn-font-size, $-ui-btn-height, $-ui-btn-padding)
-    ui-btn-icon($-ui-btn-icon-size, $-ui-btn-height, $-ui-btn-padding)
-    ui-btn-style($-ui-btn-bg, $-ui-btn-border, $-ui-btn-text)
+    ui-btn-size($-ui-btn-size)
+    ui-btn-icon($-ui-btn-size)
+    ui-btn-style($-ui-btn-colors)
 
     // size
     &[{$-ui-attr}~=large]
-        ui-btn-size($-ui-btn-large-font-size, $-ui-btn-large-height, $-ui-btn-large-padding)
-        ui-btn-icon($-ui-btn-large-icon-size, $-ui-btn-large-height, $-ui-btn-large-padding)
+        ui-btn-size($-ui-btn-size-large)
+        ui-btn-icon($-ui-btn-size-large)
 
     &[{$-ui-attr}~=small]
-        ui-btn-size($-ui-btn-small-font-size, $-ui-btn-small-height, $-ui-btn-small-padding)
-        ui-btn-icon($-ui-btn-small-icon-size, $-ui-btn-small-height, $-ui-btn-small-padding)
+        ui-btn-size($-ui-btn-size-small)
+        ui-btn-icon($-ui-btn-size-small)
 
     // block
     &[{$-ui-attr}~=block]
@@ -152,18 +122,14 @@ ui-btn-icon($icon-size, $height, $padding)
 
     // type
     &[{$-ui-attr}~=primary]
-        ui-btn-style($-ui-btn-primary-bg, $-ui-btn-primary-border, $-ui-btn-primary-text)
+        ui-btn-style($-ui-btn-colors-primary)
 
     &[{$-ui-attr}~=danger]
-        ui-btn-style($-ui-btn-danger-bg, $-ui-btn-danger-border, $-ui-btn-danger-text)
+        ui-btn-style($-ui-btn-colors-danger)
 
     &[{$-ui-attr}~=warning]
-        ui-btn-style($-ui-btn-warning-bg, $-ui-btn-warning-border, $-ui-btn-warning-text)
+        ui-btn-style($-ui-btn-colors-warning)
 
     &[{$-ui-attr}~=success]
-        ui-btn-style($-ui-btn-success-bg, $-ui-btn-success-border, $-ui-btn-success-text)
+        ui-btn-style($-ui-btn-colors-success)
 
-
-// custom type
-// .ui-btn[{$-ui-attr}~=custom]
-//     ui-btn-style(transparent, #4a87ee, #4a87ee, #4a87ee, #4a87ee, #fff)

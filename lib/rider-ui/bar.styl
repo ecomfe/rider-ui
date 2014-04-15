@@ -1,5 +1,6 @@
 @require 'common'
 
+@require 'btn'
 
 // variables
 // ================
@@ -13,40 +14,25 @@ $-ui-bar-z-index ?= 10
 $-ui-bar-title-z-index ?= 0
 $-ui-bar-btn-z-index ?= 1
 
-// default
-$-ui-bar-bg ?= #f8f8f8
-$-ui-bar-border ?= #b2b2b2
-$-ui-bar-text ?= #444
+// colors
+$-ui-bar-colors ?= { bg: #f8f8f8, border: #b2b2b2, text: #444 }
+$-ui-bar-colors-primary ?= { bg: #4a87ee, border: #145fd7, text: #fff }
+$-ui-bar-colors-danger ?= { bg: #ef4e3a, border: #cc2311, text: #fff }
+$-ui-bar-colors-warning ?= { bg: #f0b840, border: #d39211, text: #fff }
+$-ui-bar-colors-success ?= { bg: #66cc33, border: #498f24, text: #fff }
 
-// primary
-$-ui-bar-primary-bg ?= #4a87ee
-$-ui-bar-primary-border ?= #145fd7
-$-ui-bar-primary-text ?= #fff
-
-// danger
-$-ui-bar-danger-bg ?= #ef4e3a
-$-ui-bar-danger-border ?= #cc2311
-$-ui-bar-danger-text ?= #fff
-
-// warning
-$-ui-bar-warning-bg ?= #f0b840
-$-ui-bar-warning-border ?= #d39211
-$-ui-bar-warning-text ?= #fff
-
-// success
-$-ui-bar-success-bg ?= #66cc33
-$-ui-bar-success-border ?= #498f24
-$-ui-bar-success-text ?= #fff
+// bar button
+$-ui-bar-btn-size ?= { font-size: 14px, height: 28px, padding: 6px, icon-size: 16px }
 
 // mixins
 // ================
-ui-bar-style($ui-bg, $ui-border, $ui-text)
-    background-color: $ui-bg
-    border-color: $ui-border
-    background-image: linear-gradient(0deg, $ui-border, $ui-border 50%, transparent 50%)
+ui-bar-style($ui-colors)
+    background-color: $ui-colors.bg
+    border-color: $ui-colors.border
+    background-image: linear-gradient(0deg, $ui-colors.border, $ui-colors.border 50%, transparent 50%)
     color: $ui-text
     [{$-ui-attr}~=title]
-        color: $ui-text
+        color: $ui-colors.text
 
 // exports
 // ================
@@ -61,18 +47,19 @@ ui-bar-style($ui-bg, $ui-border, $ui-text)
     box-sizing: border-box
     user-select: none
 
-    background-color: $-ui-bar-bg
+    color: $-ui-bar-colors.text
+    background-color: $-ui-bar-colors.bg
 
     border-width: 0
     border-style: solid
     border-top: 1px solid transparent
-    border-bottom: 1px solid $-ui-bar-border
+    border-bottom: 1px solid $-ui-bar-colors.border
 
     // 1px border on retina
     background-size: 0
     +retina()
         border: none
-        background-image: linear-gradient(0deg, $-ui-bar-border, $-ui-bar-border 50%, transparent 50%)
+        background-image: linear-gradient(0deg, $-ui-bar-colors.border, $-ui-bar-colors.border 50%, transparent 50%)
         background-position: bottom
         background-size: 100% 1px
         background-repeat: no-repeat
@@ -109,17 +96,20 @@ ui-bar-style($ui-bg, $ui-border, $ui-text)
 
     // type
     &[{$-ui-attr}~=primary]
-        ui-bar-style($-ui-bar-primary-bg, $-ui-bar-primary-border, $-ui-bar-primary-text)
+        ui-bar-style($-ui-bar-colors-primary)
 
     &[{$-ui-attr}~=danger]
-        ui-bar-style($-ui-bar-danger-bg, $-ui-bar-danger-border, $-ui-bar-danger-text)
+        ui-bar-style($-ui-bar-colors-danger)
 
     &[{$-ui-attr}~=warning]
-        ui-bar-style($-ui-bar-warning-bg, $-ui-bar-warning-border, $-ui-bar-warning-text)
+        ui-bar-style($-ui-bar-colors-warning)
 
     &[{$-ui-attr}~=success]
-        ui-bar-style($-ui-bar-success-bg, $-ui-bar-success-border, $-ui-bar-success-text)
+        ui-bar-style($-ui-bar-colors-success)
 
+    .ui-btn
+        ui-btn-size($-ui-bar-btn-size)
+        ui-btn-icon($-ui-bar-btn-size)
 
     // with button
     .ui-btn
