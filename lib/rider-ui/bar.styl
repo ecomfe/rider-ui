@@ -1,6 +1,7 @@
 @require 'common'
 
 @require 'btn'
+@require 'btn-bar'
 
 // variables
 // ================
@@ -71,6 +72,7 @@ ui-bar-style($ui-colors)
         font-size: rem($-ui-bar-title-font-size)
         line-height: $-ui-bar-height
         text-align: center
+        font-weight: 700
 
         margin: 0 10px
         min-width: 30px
@@ -113,11 +115,18 @@ ui-bar-style($ui-colors)
 
     // with button
     .ui-btn
+    .ui-btn-bar
         z-index: $-ui-bar-btn-z-index
+
+    $ui-bar-top = (($-ui-bar-height - $-ui-bar-btn-size.height) / 2)
+
+    > .ui-btn:first-child
+    > .ui-btn-bar:first-child
+        absolute: $ui-bar-top _ _ $-ui-bar-padding
 
     [{$-ui-attr}~=title] + .ui-btn:last-child
     > .ui-btn + .ui-btn:last-child
-    > .ui-btn[{$-ui-attr}~=pull-right]
-        absolute: _ $-ui-bar-padding _ _
-
-
+    [{$-ui-attr}~=title] + .ui-btn-bar:last-child
+    > .ui-btn-bar + .ui-btn-bar:last-child
+    > [{$-ui-attr}~=pull-right]
+        absolute: $ui-bar-top $-ui-bar-padding _ _

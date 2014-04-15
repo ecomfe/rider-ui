@@ -5,8 +5,8 @@
 // ================
 
 // global setting
-$-ui-btn-border-width ?= 0
-$-ui-btn-border-radius ?= 2px
+$-ui-btn-border-width ?= 1px
+$-ui-btn-border-radius ?= 3px
 
 // size
 // ----------------
@@ -56,10 +56,11 @@ ui-btn-icon($ui-size)
 
 // style
 ui-btn-style($ui-colors, $ui-active-colors = null)
-    p($ui-colors)
     color: $ui-colors.text if $ui-colors.text
-    background: $ui-colors.bg if $ui-colors.bg
     border-color: $ui-colors.border if $ui-colors.border
+    background: $ui-colors.bg if $ui-colors.bg
+    // Android 4.2 下，有边框时消除溢色
+    background-clip: padding-box
 
     if $ui-active-colors == null
         $ui-active-colors = {}
@@ -74,8 +75,9 @@ ui-btn-style($ui-colors, $ui-active-colors = null)
     &:active
     &[{$-ui-attr}~=active]
         color: $ui-active-colors.text if $ui-active-colors.text
-        background: $ui-active-colors.bg if $ui-active-colors.bg
         border-color: $ui-active-colors.border if $ui-active-colors.border
+        background: $ui-active-colors.bg if $ui-active-colors.bg
+        background-clip: padding-box
         // transition: all .4s
         // box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15)
 
