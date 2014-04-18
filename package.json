@@ -13,10 +13,10 @@
     "test": "mocha"
   },
   "dependencies": {
-    "rider": "~0.3.1"
+    "rider": "~0.3.2"
   },
   "devDependencies": {
-    "edp-provider-rider": "~0.3.1"
+    "edp-provider-rider": "~0.3.2"
   },
   "license": "MIT",
   "repository": "https://github.com/ecomfe/rider-ui.git",
