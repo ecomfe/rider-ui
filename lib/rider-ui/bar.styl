@@ -92,6 +92,16 @@ ui-bar-style($ui-colors)
         border-width: 1px _ 0
         background-position: top
 
+    // header & footer
+    &[{$-ui-attr}~=subheader]
+        top: $-ui-bar-height
+        border-width: 0 _ 1px
+
+    &[{$-ui-attr}~=subfooter]
+        bottom: $-ui-bar-height
+        border-width: 1px _ 0
+        background-position: top
+
     // fixed
     &[{$-ui-attr}~=static]
         position: static
@@ -120,9 +130,9 @@ ui-bar-style($ui-colors)
 
     $ui-bar-top = (($-ui-bar-height - $-ui-bar-btn-size.height) / 2)
 
-    > .ui-btn:first-child
-    > .ui-btn-bar:first-child
-        absolute: $ui-bar-top _ _ $-ui-bar-padding
+    // > .ui-btn:first-child
+    // > .ui-btn-bar:first-child
+    //     absolute: $ui-bar-top _ _ $-ui-bar-padding
 
     [{$-ui-attr}~=title] + .ui-btn:last-child
     > .ui-btn + .ui-btn:last-child

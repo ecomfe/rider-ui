@@ -1,0 +1,40 @@
+initialize()
+
+@require 'icon'
+@require 'rider-ui/btn'
+@require 'rider-ui/btn-bar'
+@require 'rider-ui/bar'
+
+.container
+    padding-top: 88px
+
+.list
+    .item
+        display: flex
+        padding: 10px _
+        border-bottom: 1px solid #f7f7f7
+        .cover
+            margin-left: 10px
+            img
+                width: 90px
+            .status
+                color: green
+                text-align: center
+                margin: 5px 0
+                font-size: rem(14)
+        .content
+            flex: 1
+            margin: _ 10px
+        .title
+            font-size: rem(16)
+            margin: _ _ .4em
+        .desc
+            font-size: rem(14)
+            color: #666
+            line-height: 1.5em
+            ellipsis(3)
+        &:active
+            background: #f7f7f7
+    .more
+        border-radius: 0
+        border-width: 1px 0
