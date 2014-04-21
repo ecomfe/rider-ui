@@ -1,4 +1,4 @@
-@require 'common'
+@require 'setting'
 
 @require 'btn'
 @require 'btn-bar'
@@ -120,7 +120,7 @@ ui-bar-style($ui-colors)
         ui-bar-style($-ui-bar-colors-success)
 
     .ui-btn
-        ui-btn-size($-ui-bar-btn-size)
+        ui-btn-size($-ui-bar-btn-size, $-ui-btn-bar-border-width)
         ui-btn-icon($-ui-bar-btn-size)
 
     // with button
