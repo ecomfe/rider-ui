@@ -1,0 +1,116 @@
+// Rider UI Core
+//
+// @desc    工具栏
+// @author  firede(firede@firede.us)
+
+
+@require 'setting'
+
+@require 'btn'
+@require 'btns'
+
+
+// mixins
+// ================
+
+// base
+ui-bar-base($ui-base, $ui-default-colors, $ui-btn-size)
+    display: flex
+    transform: translate3d(0, 0, 0)
+    fixed: _ 0
+    z-index: $ui-base.z-index
+    width: 100%
+    height: $ui-base.height
+    padding: $ui-base.padding
+    box-sizing: border-box
+    user-select: none
+
+    color: $ui-default-colors.text
+    background-color: $ui-default-colors.bg
+
+    border-width: 0
+    border-style: solid
+    border-top: 1px solid transparent
+    border-bottom: 1px solid $ui-base.border-width
+
+    // 1px border on retina
+    background-size: 0
+    +retina()
+        border: none
+        background-image: linear-gradient(0deg, $ui-default-colors.border, $ui-default-colors.border 50%, transparent 50%)
+        background-position: bottom
+        background-size: 100% 1px
+        background-repeat: no-repeat
+
+    // title
+    [{$-ui-attr}~=title]
+        absolute: 0 0 _
+        z-index: $ui-base.title-z-index
+        font-size: rem($ui-base.font-size)
+        line-height: $ui-base.height
+        text-align: center
+        font-weight: 700
+
+        margin: 0 10px
+        min-width: 30px
+
+        ellipsis()
+
+        a
+            color: inherit
+
+    // header & footer
+    &[{$-ui-attr}~=header]
+        top: 0
+        border-width: 0 _ 1px
+
+    &[{$-ui-attr}~=footer]
+        bottom: 0
+        border-width: 1px _ 0
+        background-position: top
+
+    // subheader & subfooter
+    &[{$-ui-attr}~=subheader]
+        top: $ui-base.height
+        border-width: 0 _ 1px
+
+    &[{$-ui-attr}~=subfooter]
+        bottom: $ui-base.height
+        border-width: 1px _ 0
+        background-position: top
+
+    // static
+    &[{$-ui-attr}~=static]
+        position: static
+
+    // with button
+    > .ui-btn
+    > .ui-btns
+        z-index: $ui-base.btn-z-index
+
+    // bar btn generate
+    .ui-btn
+        ui-btn-size($ui-btn-size)
+        ui-btn-icon($ui-btn-size)
+
+    $ui-bar-top = (($ui-base.height - $ui-btn-size.height) / 2)
+
+    [{$-ui-attr}~=title] + .ui-btn:last-child
+    > .ui-btn + .ui-btn:last-child
+    [{$-ui-attr}~=title] + .ui-btns:last-child
+    > .ui-btns + .ui-btns:last-child
+    > [{$-ui-attr}~=pull-right]
+        // hack it
+        $ui-padding = $ui-base.padding
+        absolute: $ui-bar-top $ui-padding _ _
+
+
+// style
+ui-bar-style($ui-colors)
+    background-color: $ui-colors.bg
+    border-color: $ui-colors.border
+    background-image: linear-gradient(0deg, $ui-colors.border, $ui-colors.border 50%, transparent 50%)
+    color: $ui-colors.text
+    [{$-ui-attr}~=title]
+        color: $ui-colors.text
+

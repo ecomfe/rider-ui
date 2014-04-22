@@ -1,0 +1,45 @@
+// Rider UI Core
+//
+// @desc    按钮组
+// @author  firede(firede@firede.us)
+
+
+@require 'setting'
+@require 'btn'
+
+
+// mixins
+// ================
+
+// base
+ui-btns-base()
+    display: flex
+
+    > .ui-btn
+        flex: 1
+        display: block
+        border-radius: 0
+        margin-right: -1px
+
+        &:last-child
+            margin-right: 0
+
+        &:active
+        &[{$-ui-attr}~=active]
+            z-index: 1
+
+    &[{$-ui-attr}~=inline]
+        display: block
+        width: auto
+        clearfix()
+        > .ui-btn
+            float: left
+
+// rounded
+ui-btns-rounded($ui-radius)
+    if $ui-radius != 0
+        > .ui-btn
+            &:first-child
+                border-radius: $ui-radius 0 0 $ui-radius
+            &:last-child
+                border-radius: 0 $ui-radius $ui-radius 0

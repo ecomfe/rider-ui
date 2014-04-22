@@ -1,0 +1,110 @@
+// Rider UI 默认主题
+//
+// @desc    按钮
+// @author  firede(firede@firede.us)
+
+
+@require '../core'
+
+
+// variables
+// ================
+
+// size
+// ----------------
+
+$-ui-btn-size = {
+    font-size: 16px
+    height: 44px
+    padding: 12px
+    icon-size: 20px
+    border-width: 1px
+}
+
+$-ui-btn-size-large = {
+    font-size: 18px
+    height: 54px
+    padding: 16px
+    icon-size: 22px
+    border-width: 1px
+}
+
+$-ui-btn-size-small = {
+    font-size: 12px
+    height: 28px
+    padding: 6px
+    icon-size: 14px
+    border-width: 1px
+}
+
+// colors
+// ----------------
+
+$-ui-btn-colors = {
+    bg: #f8f8f8
+    border: #b2b2b2
+    text: #444
+}
+
+$-ui-btn-colors-primary = {
+    bg: #4a87ee
+    border: #145fd7
+    text: #fff
+}
+
+$-ui-btn-colors-danger = {
+    bg: #ef4e3a
+    border: #cc2311
+    text: #fff
+}
+
+$-ui-btn-colors-warning = {
+    bg: #f0b840
+    border: #d39211
+    text: #fff
+}
+
+$-ui-btn-colors-success = {
+    bg: #66cc33
+    border: #498f24
+    text: #fff
+}
+
+
+// exports
+// ================
+.ui-btn
+    ui-btn-base()
+    // type custom styles
+    border-radius: 3px
+
+    ui-btn-size($-ui-btn-size)
+    ui-btn-icon($-ui-btn-size)
+    ui-btn-style($-ui-btn-colors)
+
+    // size
+    &[{$-ui-attr}~=large]
+        ui-btn-size($-ui-btn-size-large)
+        ui-btn-icon($-ui-btn-size-large)
+
+    &[{$-ui-attr}~=small]
+        ui-btn-size($-ui-btn-size-small)
+        ui-btn-icon($-ui-btn-size-small)
+
+    // type
+    &[{$-ui-attr}~=primary]
+        ui-btn-style($-ui-btn-colors-primary)
+
+    &[{$-ui-attr}~=danger]
+        ui-btn-style($-ui-btn-colors-danger)
+
+    &[{$-ui-attr}~=warning]
+        ui-btn-style($-ui-btn-colors-warning)
+
+    &[{$-ui-attr}~=success]
+        ui-btn-style($-ui-btn-colors-success)
+
+    &:active
+    &[{$-ui-attr}~=active]
+        transition: all .4s
+        box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15)

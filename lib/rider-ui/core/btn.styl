@@ -1,0 +1,91 @@
+// Rider UI Core
+//
+// @desc    按钮
+// @author  firede(firede@firede.us)
+
+
+@require 'setting'
+
+
+// mixins
+// ================
+
+// base
+ui-btn-base()
+    vertical-align: top
+    text-decoration: none
+    box-sizing: border-box
+    text-align: center
+    position: relative
+    border-style: solid
+    user-select: none
+    ellipsis()
+
+    // block
+    &[{$-ui-attr}~=block]
+        display: block
+    &:not([{$-ui-attr}~=block])
+        display: inline-block
+
+    // disabled
+    &[disabled]
+    &[{$-ui-attr}~=disabled]
+        opacity: .5
+        // ie mobile don't support this.
+        pointer-events: none
+
+// size
+ui-btn-size($ui-size)
+    font-size: rem($ui-size.font-size)
+    padding: 0 $ui-size.padding
+    line-height: $ui-size.height - $ui-size.border-width * 2
+    min-width: $ui-size.height
+    height: $ui-size.height
+    border-width: $ui-size.border-width
+
+
+// icon
+ui-btn-icon($ui-size)
+    > [class^={$-ui-icon-prefix}]
+        font-size: $ui-size.icon-size
+        width: $ui-size.icon-size
+
+    &[{$-ui-attr}~=icon-left]
+        padding-left: $ui-size.padding + $ui-size.icon-size
+        > [class^={$-ui-icon-prefix}]
+            absolute: 0 _ _ ($ui-size.padding / 1.5)
+
+    &[{$-ui-attr}~=icon-right]
+        padding-right: $ui-size.padding + $ui-size.icon-size
+        > [class^={$-ui-icon-prefix}]
+            absolute: 0 ($ui-size.padding / 1.5) _ _
+
+    &[{$-ui-attr}~=icon-only]
+        padding: 0
+
+
+// style
+ui-btn-style($ui-colors, $ui-active-colors = null)
+    color: $ui-colors.text if $ui-colors.text
+    border-color: $ui-colors.border if $ui-colors.border
+    background: $ui-colors.bg if $ui-colors.bg
+    // Android 4.2 下，有边框时消除溢色
+    background-clip: padding-box
+
+    if $ui-active-colors == null
+        $ui-active-colors = {}
+        $ui-active-colors.text = $ui-colors.text
+        if typeof($ui-colors.bg) == 'rgba'
+            $ui-active-colors-bg = darken($ui-colors.bg, 10%)
+            $ui-active-colors.bg = $ui-active-colors-bg
+        if typeof($ui-colors.border) == 'rgba'
+            $ui-active-colors-border = darken($ui-colors.border, 10%)
+            $ui-active-colors.border = $ui-active-colors-border
+
+    &:active
+    &[{$-ui-attr}~=active]
+        color: $ui-active-colors.text if $ui-active-colors.text
+        border-color: $ui-active-colors.border if $ui-active-colors.border
+        background: $ui-active-colors.bg if $ui-active-colors.bg
+        background-clip: padding-box
+
