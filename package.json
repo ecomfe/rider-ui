@@ -9,9 +9,6 @@
     "scripts": {
         "test": "mocha"
     },
-    "dependencies": {
-        "rider": "~0.3.2"
-    },
     "devDependencies": {
         "edp-provider-rider": "~0.3.2"
     },
