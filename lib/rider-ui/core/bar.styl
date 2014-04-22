@@ -1,66 +1,43 @@
+// Rider UI Core
+// 
+// @desc    工具栏
+// @author  firede(firede@firede.us)
+
+
 @require 'setting'
 
 @require 'btn'
-@require 'btn-bar'
+@require 'btns'
 
-// variables
-// ================
-
-// global setting
-$-ui-bar-height ?= 44px
-$-ui-bar-padding ?= 8px
-$-ui-bar-title-font-size ?= 16px
-
-$-ui-bar-z-index ?= 10
-$-ui-bar-title-z-index ?= 0
-$-ui-bar-btn-z-index ?= 1
-
-// colors
-$-ui-bar-colors ?= { bg: #f8f8f8, border: #b2b2b2, text: #444 }
-$-ui-bar-colors-primary ?= { bg: #4a87ee, border: #145fd7, text: #fff }
-$-ui-bar-colors-danger ?= { bg: #ef4e3a, border: #cc2311, text: #fff }
-$-ui-bar-colors-warning ?= { bg: #f0b840, border: #d39211, text: #fff }
-$-ui-bar-colors-success ?= { bg: #66cc33, border: #498f24, text: #fff }
-
-// bar button
-$-ui-bar-btn-size ?= { font-size: 14px, height: 28px, padding: 6px, icon-size: 16px }
 
 // mixins
 // ================
-ui-bar-style($ui-colors)
-    background-color: $ui-colors.bg
-    border-color: $ui-colors.border
-    background-image: linear-gradient(0deg, $ui-colors.border, $ui-colors.border 50%, transparent 50%)
-    color: $ui-colors.text
-    [{$-ui-attr}~=title]
-        color: $ui-colors.text
 
-// exports
-// ================
-.ui-bar
+// base
+ui-bar-base($ui-base, $ui-default-colors, $ui-btn-size)
     display: flex
     transform: translate3d(0, 0, 0)
     fixed: _ 0
-    z-index: $-ui-bar-z-index
+    z-index: $ui-base.z-index
     width: 100%
-    height: $-ui-bar-height
-    padding: $-ui-bar-padding
+    height: $ui-base.height
+    padding: $ui-base.padding
     box-sizing: border-box
     user-select: none
 
-    color: $-ui-bar-colors.text
-    background-color: $-ui-bar-colors.bg
+    color: $ui-default-colors.text
+    background-color: $ui-default-colors.bg
 
     border-width: 0
     border-style: solid
     border-top: 1px solid transparent
-    border-bottom: 1px solid $-ui-bar-colors.border
+    border-bottom: 1px solid $ui-base.border-width
 
     // 1px border on retina
     background-size: 0
     +retina()
         border: none
-        background-image: linear-gradient(0deg, $-ui-bar-colors.border, $-ui-bar-colors.border 50%, transparent 50%)
+        background-image: linear-gradient(0deg, $ui-default-colors.border, $ui-default-colors.border 50%, transparent 50%)
         background-position: bottom
         background-size: 100% 1px
         background-repeat: no-repeat
@@ -68,9 +45,9 @@ ui-bar-style($ui-colors)
     // title
     [{$-ui-attr}~=title]
         absolute: 0 0 _
-        z-index: $-ui-bar-title-z-index
-        font-size: rem($-ui-bar-title-font-size)
-        line-height: $-ui-bar-height
+        z-index: $ui-base.title-z-index
+        font-size: rem($ui-base.font-size)
+        line-height: $ui-base.height
         text-align: center
         font-weight: 700
 
@@ -92,51 +69,48 @@ ui-bar-style($ui-colors)
         border-width: 1px _ 0
         background-position: top
 
-    // header & footer
+    // subheader & subfooter
     &[{$-ui-attr}~=subheader]
-        top: $-ui-bar-height
+        top: $ui-base.height
         border-width: 0 _ 1px
 
     &[{$-ui-attr}~=subfooter]
-        bottom: $-ui-bar-height
+        bottom: $ui-base.height
         border-width: 1px _ 0
         background-position: top
 
-    // fixed
+    // static
     &[{$-ui-attr}~=static]
         position: static
 
-    // type
-    &[{$-ui-attr}~=primary]
-        ui-bar-style($-ui-bar-colors-primary)
-
-    &[{$-ui-attr}~=danger]
-        ui-bar-style($-ui-bar-colors-danger)
-
-    &[{$-ui-attr}~=warning]
-        ui-bar-style($-ui-bar-colors-warning)
-
-    &[{$-ui-attr}~=success]
-        ui-bar-style($-ui-bar-colors-success)
-
-    .ui-btn
-        ui-btn-size($-ui-bar-btn-size, $-ui-btn-bar-border-width)
-        ui-btn-icon($-ui-bar-btn-size)
-
     // with button
+    > .ui-btn
+    > .ui-btns
+        z-index: $ui-base.btn-z-index
+
+    // bar btn generate
     .ui-btn
-    .ui-btn-bar
-        z-index: $-ui-bar-btn-z-index
+        ui-btn-size($ui-btn-size)
+        ui-btn-icon($ui-btn-size)
 
-    $ui-bar-top = (($-ui-bar-height - $-ui-bar-btn-size.height) / 2)
-
-    // > .ui-btn:first-child
-    // > .ui-btn-bar:first-child
-    //     absolute: $ui-bar-top _ _ $-ui-bar-padding
+    $ui-bar-top = (($ui-base.height - $ui-btn-size.height) / 2)
 
     [{$-ui-attr}~=title] + .ui-btn:last-child
     > .ui-btn + .ui-btn:last-child
-    [{$-ui-attr}~=title] + .ui-btn-bar:last-child
-    > .ui-btn-bar + .ui-btn-bar:last-child
+    [{$-ui-attr}~=title] + .ui-btns:last-child
+    > .ui-btns + .ui-btns:last-child
     > [{$-ui-attr}~=pull-right]
-        absolute: $ui-bar-top $-ui-bar-padding _ _
+        // hack it
+        $ui-padding = $ui-base.padding
+        absolute: $ui-bar-top $ui-padding _ _
+
+
+// style
+ui-bar-style($ui-colors)
+    background-color: $ui-colors.bg
+    border-color: $ui-colors.border
+    background-image: linear-gradient(0deg, $ui-colors.border, $ui-colors.border 50%, transparent 50%)
+    color: $ui-colors.text
+    [{$-ui-attr}~=title]
+        color: $ui-colors.text
+

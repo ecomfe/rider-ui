@@ -1,7 +1,12 @@
 var epr = require('edp-provider-rider');
 var riderUI = require('../lib');
 
+function stylusConfig(style) {
+    style.use(epr.plugin());
+    style.use(riderUI());
+}
 exports.stylus = epr.stylus;
+
 exports.port = 8848;
 exports.directoryIndexes = true;
 exports.documentRoot = __dirname;
@@ -13,11 +18,7 @@ exports.getLocations = function () {
             handler: [
                 autocss({
                     stylus: {
-                        stylus: epr.stylus,
-                        use: function(style) {
-                            style.use(epr.plugin());
-                            style.use(riderUI());
-                        }
+                        use: stylusConfig
                     }
                 })
             ]

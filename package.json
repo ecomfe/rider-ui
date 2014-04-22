@@ -13,8 +13,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "rider": "~0.3.2",
-    "husl": "~4.0.0"
+    "rider": "~0.3.2"
   },
   "devDependencies": {
     "edp-provider-rider": "~0.3.2"

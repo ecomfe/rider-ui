@@ -29,13 +29,13 @@ exports.getTasks = function () {
             plugins: livereload(),
             intervalTime: 3000
         }
-    }
+    };
 };
 
 exports.getGroups = function () {
     return {
         'default': [ 'livereload' ]
-    }
+    };
 };
 
 exports.injectPlugin = function (plugins) {
