@@ -10,6 +10,21 @@
 // mixins
 // ================
 
+ui-btn-set-active()
+    &:active
+    &[{$-ui-attr}~=active]
+        {block}
+
+ui-btn-set-disabled()
+    &[disabled]
+    &[{$-ui-attr}~=disabled]
+        {block}
+
+ui-btn-set-type($ui-type)
+    $ui-type = unquote($ui-type) if typeof($ui-type) == 'string'
+    &[{$-ui-attr}~={$ui-type}]
+        {block}
+
 // base
 ui-btn-base()
     vertical-align: top
@@ -28,8 +43,7 @@ ui-btn-base()
         display: inline-block
 
     // disabled
-    &[disabled]
-    &[{$-ui-attr}~=disabled]
+    +ui-btn-set-disabled()
         opacity: .5
         // ie mobile don't support this.
         pointer-events: none
@@ -50,17 +64,17 @@ ui-btn-icon($ui-size)
         font-size: $ui-size.icon-size
         width: $ui-size.icon-size
 
-    &[{$-ui-attr}~=icon-left]
+    +ui-btn-set-type('icon-left')
         padding-left: $ui-size.padding + $ui-size.icon-size
         > [class^={$-ui-icon-prefix}]
             absolute: 0 _ _ ($ui-size.padding / 1.5)
 
-    &[{$-ui-attr}~=icon-right]
+    +ui-btn-set-type('icon-right')
         padding-right: $ui-size.padding + $ui-size.icon-size
         > [class^={$-ui-icon-prefix}]
             absolute: 0 ($ui-size.padding / 1.5) _ _
 
-    &[{$-ui-attr}~=icon-only]
+    +ui-btn-set-type('icon-only')
         padding: 0
 
 
@@ -82,8 +96,7 @@ ui-btn-style($ui-colors, $ui-active-colors = null)
             $ui-active-colors-border = darken($ui-colors.border, 10%)
             $ui-active-colors.border = $ui-active-colors-border
 
-    &:active
-    &[{$-ui-attr}~=active]
+    +ui-btn-set-active()
         color: $ui-active-colors.text if $ui-active-colors.text
         border-color: $ui-active-colors.border if $ui-active-colors.border
         background: $ui-active-colors.bg if $ui-active-colors.bg

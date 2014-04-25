@@ -83,28 +83,36 @@ $-ui-btn-colors-success = {
     ui-btn-style($-ui-btn-colors)
 
     // size
-    &[{$-ui-attr}~=large]
+    +ui-btn-set-type('large')
         ui-btn-size($-ui-btn-size-large)
         ui-btn-icon($-ui-btn-size-large)
 
-    &[{$-ui-attr}~=small]
+    +ui-btn-set-type('small')
         ui-btn-size($-ui-btn-size-small)
         ui-btn-icon($-ui-btn-size-small)
 
     // type
-    &[{$-ui-attr}~=primary]
+    +ui-btn-set-type('primary')
         ui-btn-style($-ui-btn-colors-primary)
 
-    &[{$-ui-attr}~=danger]
+    +ui-btn-set-type('danger')
         ui-btn-style($-ui-btn-colors-danger)
 
-    &[{$-ui-attr}~=warning]
+    +ui-btn-set-type('warning')
         ui-btn-style($-ui-btn-colors-warning)
 
-    &[{$-ui-attr}~=success]
+    +ui-btn-set-type('success')
         ui-btn-style($-ui-btn-colors-success)
 
-    &:active
-    &[{$-ui-attr}~=active]
+    +ui-btn-set-type('clear')
+        ui-btn-style({
+            bg: transparent
+            border: transparent
+            text: #fff
+        })
+        +ui-btn-set-active()
+            opacity: .8
+
+    +ui-btn-set-active()
         transition: all .4s
         box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15)
