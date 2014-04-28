@@ -71,6 +71,16 @@ $-ui-btn-colors-success = {
 }
 
 
+// mixins
+// ================
+ui-btn-outlined($ui-colors)
+    +ui-set-type('outlined')
+        background: transparent
+        color: $ui-colors.border
+        +ui-btn-set-active()
+            background: $ui-colors.border
+            color: $ui-colors.text
+
 // exports
 // ================
 .ui-btn
@@ -81,30 +91,35 @@ $-ui-btn-colors-success = {
     ui-btn-size($-ui-btn-size)
     ui-btn-icon($-ui-btn-size)
     ui-btn-style($-ui-btn-colors)
+    ui-btn-outlined($-ui-btn-colors)
 
     // size
-    &[{$-ui-attr}~=large]
+    +ui-set-type('large')
         ui-btn-size($-ui-btn-size-large)
         ui-btn-icon($-ui-btn-size-large)
 
-    &[{$-ui-attr}~=small]
+    +ui-set-type('small')
         ui-btn-size($-ui-btn-size-small)
         ui-btn-icon($-ui-btn-size-small)
 
     // type
-    &[{$-ui-attr}~=primary]
+    +ui-set-type('primary')
         ui-btn-style($-ui-btn-colors-primary)
+        ui-btn-outlined($-ui-btn-colors-primary)
 
-    &[{$-ui-attr}~=danger]
+    +ui-set-type('danger')
         ui-btn-style($-ui-btn-colors-danger)
+        ui-btn-outlined($-ui-btn-colors-danger)
 
-    &[{$-ui-attr}~=warning]
+    +ui-set-type('warning')
         ui-btn-style($-ui-btn-colors-warning)
+        ui-btn-outlined($-ui-btn-colors-warning)
 
-    &[{$-ui-attr}~=success]
+    +ui-set-type('success')
         ui-btn-style($-ui-btn-colors-success)
+        ui-btn-outlined($-ui-btn-colors-success)
 
-    &:active
-    &[{$-ui-attr}~=active]
+    +ui-btn-set-active()
         transition: all .4s
         box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.15)
+

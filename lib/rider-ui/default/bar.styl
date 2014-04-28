@@ -68,15 +68,15 @@ $-ui-bar-colors-success = {
     ui-bar-base($-ui-bar-base, $-ui-bar-colors, $-ui-bar-btn-size)
 
     // type
-    &[{$-ui-attr}~=primary]
+    +ui-set-type('primary')
         ui-bar-style($-ui-bar-colors-primary)
 
-    &[{$-ui-attr}~=danger]
+    +ui-set-type('danger')
         ui-bar-style($-ui-bar-colors-danger)
 
-    &[{$-ui-attr}~=warning]
+    +ui-set-type('warning')
         ui-bar-style($-ui-bar-colors-warning)
 
-    &[{$-ui-attr}~=success]
+    +ui-set-type('success')
         ui-bar-style($-ui-bar-colors-success)
 

@@ -1,0 +1,14 @@
+// Rider UI Core
+//
+// @desc    通用方法
+// @author  firede(firede@firede.us)
+
+$-ui-attr ?= 'data-ui'
+$-ui-icon-prefix ?= 'icon-'
+
+
+// 设置新类型
+ui-set-type($ui-type)
+    $ui-type = unquote($ui-type) if typeof($ui-type) == 'string'
+    &[{$-ui-attr}~={$ui-type}]
+        {block}
