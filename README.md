@@ -23,7 +23,9 @@ function stylusConfig(style) {
 }
 ```
 
-## 使用说明
+*注：请确保 edp-provider-rider 的版本与 package.json 中的配置相符。*
+
+## 文档
 
 ### Hello World
 
