@@ -14,12 +14,33 @@
 
 <body>
     <nav class="ui-bar" data-ui="primary header">
-        <a href="https://github.com/ecomfe/rider-ui" class="ui-btn" data-ui="primary icon-left"><i class="icon-github-alt"></i>主页</a>
+        <a href="https://github.com/ecomfe/rider-ui" class="ui-btn" data-ui="primary icon-left">
+            <i class="icon-github-alt"></i>
+            主页
+        </a>
         <h1 data-ui="title">Rider UI 示例</h1>
     </nav>
 
     <div class="container">
-
+        <div class="content ui-content">
+            <h1>網頁排版：湯品－垂直的韻律</h1>
+            <p>typography 大師 Robert Bringhurst (The Elements of Typographic Style 一書的作者 ) 曾經說：</p>
+            <blockquote>“Space in typography is like time in music. It is infinitely divisible, but a few proportional intervals can be much more useful than a limitless choice of arbitrary quantities.”</blockquote>
+            <p>「字型排版學中的空間就像是音樂中的時間。空間可以被切成無限多塊，但在設計上，只要一些合於比例的間隙，卻比一大堆任意而無理的切割還有用許多。」這句話完整詮釋了「垂直的韻律」(Vertical Rhythm) 在字型排版上的用處：在音樂中，好的節奏遠比隨意加之的額外裝飾還要來得重要；而在排版中，若每個區塊間的距離符合固定比例，那麼這段文章看起來就會很有韻律感，版面整齊、好看以外，更增加了可閱讀性，讓讀者更願意花長時間閱讀。祕訣就在以「基本行距」為單位決定版面上各區塊的距離。</p>
+            <h2>以基本行距為固定比例 h2</h2>
+            <p>上面所說的固定比例，其實就是「基本行距」(basic leading)。基本行距是一個「內文大小」* 「行高」之後的數值。例如在這篇文章的設定中，基本行距是這麼計算的：</p>
+            <pre><code>font-size:18px * line-height:1.7em = basic leading:30.6px</code></pre>
+            <p>內文大小為 18px，line-height 為 1.7em。em（發音為 m 或 emma）就是「字的大小」的意思，1.7em 的 line-height，意思就是行高是內文的 1.7 倍大小，所以真正的行高數值是 18*1.7 等於 30.6px。換句話說，這篇文章中的每一行高度被規定為 30.6px，若各區塊的距離符合這個數值的倍數，這篇文章就呈現了垂直的韻律。</p>
+            <h3>不要再用預設值了 不要再用預設值了 不要再用預設值了 h3</h3>
+            <p>以文章的一個段落而言，當我們用 &lt;p&gt;, &lt;div&gt;, &lt;li&gt; 或 &lt;blockquote&gt; 排版時，我們要界定 line-height, margin-top, margin-bottom 的數值以確保所有元素彼此的距離會呈現 vertical rhythm。有朋友可能會說用 <br/> 不就好了嗎？但其實 <br/> 採取的是一個 line-height 預設值，這就表示會有你無法掌控的狀況發生，可能會打破文章的韻律感。所以還是建議大家把各個元素的距離定義清楚，例如，在內文大小等於 18px 時，上下距離各取 1.7em，也就是佔一行：</p>
+            <hr>
+            <p>在上面的範例中，我們把一個段落的行高決定為文字的 1.7 倍大小，也就是 30.6px 這個高度；而這個段落與上下元素的距離要保持同樣的數值，才會有韻律感。但文章中總不會所有的元素字體大小都是同樣的，副標題一定會比內文大，註解也比內文小，所以怎麼決定這些元素的距離呢？其實，也還是要以基本行距為比例來決定。</p>
+            <h4>考驗數學的時刻 考驗數學的時刻 考驗數學的時刻 h4</h4>
+            <p>例如，像這篇文章的副標題是設定在 22px，那麼要維持 vertical rhythm 的方法，就是把行高調成 30.6px。所以我們就要抓 30.6 的倍數：</p>
+            <h5>圖片怎麼辦？圖片怎麼辦？圖片怎麼辦？圖片怎麼辦？ h5</h5>
+            <p>圖片的道理跟一段文字是一樣的，它們都會佔一去一定的 X 高度。所以只要把圖片的 X 高度設定為基本行高的倍數就可以了。例如，若這篇文章的圖都設定在 306px 的高度，也就是十行，就可以符合韻律感；但數位介面並不像印刷品，設計師可以完全控制。使用者可以用 ctrl 與滾輪任意調整螢幕解析度。若不希望圖片尺寸遭到改變，可以把高度設定為 em。例如一張 306px 高的圖片，除以 18px 的文字大小，就是 17em，同樣也是十行的高度，但因為 em 是相對值，所以會針對使用行為彈性調整。</p>
+            <h6>發表您的想法 發表您的想法 發表您的想法 發表您的想法 發表您的想法 h6</h6>
+        </div>
     </div>
 
     <script>
