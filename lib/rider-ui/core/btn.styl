@@ -4,7 +4,7 @@
 // @author  firede(firede@firede.us)
 
 
-@require 'setting'
+@require 'common'
 
 
 // mixins
@@ -18,11 +18,6 @@ ui-btn-set-active()
 ui-btn-set-disabled()
     &[disabled]
     &[{$-ui-attr}~=disabled]
-        {block}
-
-ui-btn-set-type($ui-type)
-    $ui-type = unquote($ui-type) if typeof($ui-type) == 'string'
-    &[{$-ui-attr}~={$ui-type}]
         {block}
 
 // base
@@ -64,17 +59,17 @@ ui-btn-icon($ui-size)
         font-size: $ui-size.icon-size
         width: $ui-size.icon-size
 
-    +ui-btn-set-type('icon-left')
+    +ui-set-type('icon-left')
         padding-left: $ui-size.padding + $ui-size.icon-size
         > [class^={$-ui-icon-prefix}]
             absolute: 0 _ _ ($ui-size.padding / 1.5)
 
-    +ui-btn-set-type('icon-right')
+    +ui-set-type('icon-right')
         padding-right: $ui-size.padding + $ui-size.icon-size
         > [class^={$-ui-icon-prefix}]
             absolute: 0 ($ui-size.padding / 1.5) _ _
 
-    +ui-btn-set-type('icon-only')
+    +ui-set-type('icon-only')
         padding: 0
 
 

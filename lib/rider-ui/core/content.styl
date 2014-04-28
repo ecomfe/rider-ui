@@ -4,13 +4,14 @@
 // @author  firede(firede@firede.us)
 
 
-@require 'setting'
+@require 'common'
 
 
 // mixins
 // ================
 
-ui-content-style()
+ui-content($ui-font-size = 16px, $ui-line-height = 26px, $ui-heading-ratio = (2.75 2.25 1.75 1.25 1 0.85))
+    // base
     h1, h2, h3, h4, h5, h6,
     strong
         font-weight: 700
@@ -21,27 +22,25 @@ ui-content-style()
     pre
         overflow-x: auto
 
-
-// vertical rhythm
-ui-content-rhythm($font-size = 16px, $line-height = 26px, $ui-heading-ratio = (2.75 2.25 1.75 1.25 1 0.85))
-    font-size: rem($font-size)
-    line-height: rem($line-height)
+    // vertical rhythm
+    font-size: rem($ui-font-size)
+    line-height: rem($ui-line-height)
 
     // set heading font-size
     $ui-heading-length = length($ui-heading-ratio)
     for $ui-cur in (1..$ui-heading-length)
         $ui-cur-ratio = $ui-heading-ratio[$ui-cur - 1]
-        $ui-cur-size = $ui-cur-ratio * $font-size
+        $ui-cur-size = $ui-cur-ratio * $ui-font-size
         h{$ui-cur}
             font-size: rem($ui-cur-size)
-            line-height: rem(ceil($font-size * $ui-cur-ratio / $line-height) * $line-height)
+            line-height: rem(ceil($ui-font-size * $ui-cur-ratio / $ui-line-height) * $ui-line-height)
 
     h1, h2, h3, h4, h5, h6
-        margin: rem($line-height / 2) _
+        margin: rem($ui-line-height / 2) _
 
     // list
     ul, ol
-        margin: rem($line-height / 2) 0 rem($line-height / 2) rem(25)
+        margin: rem($ui-line-height / 2) 0 rem($ui-line-height / 2) rem(25)
     ul
         list-style-type: disc
     ol
@@ -53,4 +52,4 @@ ui-content-rhythm($font-size = 16px, $line-height = 26px, $ui-heading-ratio = (2
         margin: 0 _
 
     p, blockquote
-        margin: rem($line-height / 2) _
+        margin: rem($ui-line-height / 2) _

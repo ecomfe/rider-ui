@@ -4,7 +4,7 @@
 // @author  firede(firede@firede.us)
 
 
-@require 'setting'
+@require 'common'
 
 @require 'btn'
 @require 'btns'
@@ -60,27 +60,27 @@ ui-bar-base($ui-base, $ui-default-colors, $ui-btn-size)
             color: inherit
 
     // header & footer
-    &[{$-ui-attr}~=header]
+    +ui-set-type('header')
         top: 0
         border-width: 0 _ 1px
 
-    &[{$-ui-attr}~=footer]
+    +ui-set-type('footer')
         bottom: 0
         border-width: 1px _ 0
         background-position: top
 
     // subheader & subfooter
-    &[{$-ui-attr}~=subheader]
+    +ui-set-type('subheader')
         top: $ui-base.height
         border-width: 0 _ 1px
 
-    &[{$-ui-attr}~=subfooter]
+    +ui-set-type('subfooter')
         bottom: $ui-base.height
         border-width: 1px _ 0
         background-position: top
 
     // static
-    &[{$-ui-attr}~=static]
+    +ui-set-type('static')
         position: static
 
     // with button

@@ -4,7 +4,7 @@
 // @author  firede(firede@firede.us)
 
 
-@require 'setting'
+@require 'common'
 @require 'btn'
 
 
@@ -25,11 +25,10 @@ ui-btns-base()
         &:last-child
             margin-right: 0
 
-        &:active
-        &[{$-ui-attr}~=active]
+        +ui-btn-set-active()
             z-index: 1
 
-    &[{$-ui-attr}~=inline]
+    +ui-set-type('inline')
         display: block
         width: auto
         clearfix()
