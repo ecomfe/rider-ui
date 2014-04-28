@@ -42,3 +42,12 @@ ui-content-rhythm($font-size = 16px, $line-height = 26px, $ui-heading-ratio = (2
     // list
     ul, ol
         margin: rem($line-height / 2) 0 rem($line-height / 2) rem(25)
+    ul
+        list-style-type: disc
+    ol
+        list-style-type: decimal
+    ul ul,
+    ul ol,
+    ol ol,
+    ol ul
+        margin: 0 _
