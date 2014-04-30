@@ -1,6 +1,6 @@
 {
     "name": "rider-ui",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "基于 rider 的 UI 样式库，用于快速构建移动应用界面。",
     "maintainers": [
         { "name": "Firede", "email": "firede@firede.us" }
