@@ -7,7 +7,7 @@
     ],
     "main": "lib/index.js",
     "devDependencies": {
-        "edp-provider-rider": "~0.3.4"
+        "edp-provider-rider": "~0.4.0"
     },
     "license": "MIT",
     "repository": "https://github.com/ecomfe/rider-ui.git",
