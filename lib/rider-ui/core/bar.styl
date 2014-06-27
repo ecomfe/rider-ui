@@ -15,13 +15,15 @@
 
 // base
 ui-bar-base($ui-base, $ui-default-colors, $ui-btn-size)
+    $ui-bar-top = (($ui-base.height - $ui-btn-size.height) / 2)
+
     display: flex
     transform: translate3d(0, 0, 0)
     fixed: _ 0
     z-index: $ui-base.z-index
     width: 100%
     height: $ui-base.height
-    padding: $ui-base.padding
+    padding: $ui-bar-top $ui-base.padding 0
     box-sizing: border-box
     user-select: none
 
@@ -92,8 +94,6 @@ ui-bar-base($ui-base, $ui-default-colors, $ui-btn-size)
     .ui-btn
         ui-btn-size($ui-btn-size)
         ui-btn-icon($ui-btn-size)
-
-    $ui-bar-top = (($ui-base.height - $ui-btn-size.height) / 2)
 
     [{$-ui-attr}~=title] + .ui-btn:last-child
     > .ui-btn + .ui-btn:last-child
